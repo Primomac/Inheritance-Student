@@ -15,6 +15,10 @@ public class Weapon : MonoBehaviour
     public float attackDuration; // The duration of the weapon's attack.
     public float attackRate; // The rate at which the weapon can attack.
     public float damage; // The amount of damage the weapon can deal.
+    public float elementChance = 10;
+    public float elementDamage = 0;
+    public string element = "Physical"; // What type of damage the weapon deals. Enemies may take more or less damage from certain elements.
+    public string subElement = "Fire";
 
 
     // Start is called before the first frame update.
@@ -37,7 +41,6 @@ public class Weapon : MonoBehaviour
         {
             // Enable the weapon and the box collider, and set a timer to disable the weapon.
             EnableWeapon();
-            boxCollider.enabled = true;
             Invoke("DisableWeapon", attackDuration);
 
             // Set a timer to reset the weapon's attack ability.
@@ -73,7 +76,14 @@ public class Weapon : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             // If it does, deal damage to the enemy.
-            collision.GetComponent<Enemy>().TakeDamage(damage);
+            float incomingDamage = damage;
+            string incomingElement = element;
+            collision.GetComponent<Enemy>().TakeDamage(damage, element);
+            if (Random.Range(1, 101) <= elementChance)
+            {
+                Debug.Log("Elemental damage triggered!");
+                collision.GetComponent<Enemy>().TakeDamage(elementDamage, subElement);
+            }
         }
     }
 

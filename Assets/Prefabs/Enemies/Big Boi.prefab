@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 257194312347319629}
   - component: {fileID: 257194312347319628}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Big Boi
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,12 +133,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   canMove: 1
-  health: 10
+  health: 15
   stunTime: 0.5
   knockbackForce: 2
+  weakness: Fire
   rb: {fileID: 0}
   enemyCollider: {fileID: 0}
-  pointValue: 20
+  pointValue: 30
   gm: {fileID: 0}
 --- !u!58 &257194312347319629
 CircleCollider2D:

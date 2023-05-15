@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public float health;
     public float stunTime;
     public float knockbackForce;
+    public string weakness;
     public Rigidbody2D rb;
     public Collider2D enemyCollider;
     public int pointValue;
@@ -43,9 +44,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damageToTake)
+    public void TakeDamage(float damageToTake, string damageType)
     {
-        health -= damageToTake;
+        float incomingDamage = damageToTake;
+        if (damageType == weakness)
+        {
+            Debug.Log("Weakness hit!");
+            incomingDamage *= 2;
+        }
+        health -= incomingDamage;
         if(health <= 0)
         {
             Die();
