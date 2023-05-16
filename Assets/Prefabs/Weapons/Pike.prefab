@@ -51,8 +51,10 @@ MonoBehaviour:
   sr: {fileID: 0}
   boxCollider: {fileID: 0}
   canAttack: 1
+  currentPierce: 0
   attackDuration: 0.5
   attackRate: 60
+  attackPierce: 10
   damage: 5
   elementChance: 50
   elementDamage: 5

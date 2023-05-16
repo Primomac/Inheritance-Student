@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public float stunTime;
     public float knockbackForce;
     public string weakness;
+    public float dropChance = 100;
+    public GameObject dropItem;
     public Rigidbody2D rb;
     public Collider2D enemyCollider;
     public int pointValue;
@@ -76,6 +78,11 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        float dropRoll = Random.Range(0, 101);
+        if (dropRoll <= (GameObject.Find("Player").GetComponent<PlayerController>().luck * dropChance / 100))
+        {
+            Instantiate(dropItem, transform.position, transform.rotation);
+        }
         gm.AddScore(pointValue);
         Destroy(gameObject);
     }

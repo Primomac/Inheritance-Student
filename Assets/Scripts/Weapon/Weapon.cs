@@ -12,8 +12,10 @@ public class Weapon : MonoBehaviour
 
     // These variables can be adjusted for each subclass of Weapon.
     public bool canAttack = true; // Whether or not the weapon can currently attack.
+    public float currentPierce; // How many enemies the weapon can currently hit.
     public float attackDuration; // The duration of the weapon's attack.
     public float attackRate; // The rate at which the weapon can attack.
+    public float attackPierce; // The number of enemies that can take damage in a single attack.
     public float damage; // The amount of damage the weapon can deal.
     public float elementChance = 10;
     public float elementDamage = 0;
@@ -31,6 +33,7 @@ public class Weapon : MonoBehaviour
 
         // Disable the weapon to start with.
         DisableWeapon();
+        currentPierce = attackPierce;
     }
 
     // This is a virtual function that can be overridden by subclasses of Weapon.
@@ -67,13 +70,14 @@ public class Weapon : MonoBehaviour
     public void AttackReset()
     {
         canAttack = true;
+        currentPierce = attackPierce;
     }
 
     // This function is called when the weapon's box collider collides with another collider.
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the collider belongs to an enemy.
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") && currentPierce > 0)
         {
             // If it does, deal damage to the enemy.
             float incomingDamage = damage;
@@ -84,6 +88,7 @@ public class Weapon : MonoBehaviour
                 Debug.Log("Elemental damage triggered!");
                 collision.GetComponent<Enemy>().TakeDamage(elementDamage, subElement);
             }
+            currentPierce--;
         }
     }
 

@@ -137,6 +137,8 @@ MonoBehaviour:
   stunTime: 0.5
   knockbackForce: 2
   weakness: Fire
+  dropChance: 500
+  dropItem: {fileID: 3448147957060325602, guid: b1b42285a8646f24fa61efef46300354, type: 3}
   rb: {fileID: 0}
   enemyCollider: {fileID: 0}
   pointValue: 30

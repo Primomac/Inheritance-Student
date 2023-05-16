@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Variables
+
+    public float maxHealth; public float health;
+    public float luck = 5;
     public float moveSpeed = 5f;
     public Weapon defaultWeapon;
     public Weapon equippedWeapon;
@@ -19,7 +23,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-
+        health = maxHealth;
         EquipWeapon(defaultWeapon);
     }
 
